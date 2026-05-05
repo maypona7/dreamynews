@@ -1,0 +1,24 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function role() {
+      return isSignedIn() ? (request.auth.token.role != null ? request.auth.token.role : 'viewer') : null;
+    }
+    function status() {
+      return isSignedIn() ? (request.auth.token.status != null ? request.auth.token.status : 'pending') : null;
+    }
+    function isWriter() {
+      return status() == 'approved' && (role() == 'writer' || role() == 'admin');
+    }
+
+    match /posts/{postId}/images/{file=**} {
+      allow read: if status() == 'approved';
+      allow write: if isWriter()
+        && request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
