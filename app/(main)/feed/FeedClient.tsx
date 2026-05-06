@@ -16,24 +16,32 @@ export default function FeedClient() {
   const params = useSearchParams();
   const urlTab: PostStatus =
     params.get("tab") === "archived" ? "archived" : "published";
-
-  const [tab, setTab] = useState<PostStatus>(urlTab);
-  const [, startTransition] = useTransition();
+  /** 클릭 직후 탭 UI·목록 전환을 위해 URL보다 앞서 적용 (URL과 맞으면 해제) */
+  const [tabOverride, setTabOverride] = useState<PostStatus | null>(null);
+  const status: PostStatus = tabOverride ?? urlTab;
+  const [, startTabTransition] = useTransition();
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [posts, setPosts] = useState<Post[] | null>(null);
   const [categoryId, setCategoryId] = useState<string | null>(null);
 
-  useEffect(() => {
-    setTab(urlTab);
-  }, [urlTab]);
-
   useEffect(() => subscribeCategories(setCategories), []);
 
   useEffect(() => {
+    if (tabOverride !== null && tabOverride === urlTab) {
+      setTabOverride(null);
+    }
+  }, [urlTab, tabOverride]);
+
+  useEffect(() => {
+    router.prefetch("/feed");
+    router.prefetch("/feed?tab=archived");
+  }, [router]);
+
+  useEffect(() => {
     setPosts(null);
-    return subscribePosts(tab, null, setPosts);
-  }, [tab]);
+    return subscribePosts(status, null, setPosts);
+  }, [status]);
 
   const filteredPosts = useMemo(() => {
     if (posts === null) return null;
@@ -63,15 +71,14 @@ export default function FeedClient() {
           <button
             type="button"
             onClick={() => {
-              setTab("published");
-              startTransition(() => {
-                router.replace("/feed", { scroll: false });
+              setTabOverride("published");
+              startTabTransition(() => {
+                router.replace("/feed");
               });
             }}
-            onMouseEnter={() => router.prefetch("/feed")}
             className={clsx(
-              "px-3 py-1 rounded-md transition-colors",
-              tab === "published"
+              "px-3 py-1 rounded-md transition-colors duration-150 active:scale-[0.98]",
+              status === "published"
                 ? "bg-slate-900 text-white"
                 : "text-slate-600",
             )}
@@ -81,15 +88,14 @@ export default function FeedClient() {
           <button
             type="button"
             onClick={() => {
-              setTab("archived");
-              startTransition(() => {
-                router.replace("/feed?tab=archived", { scroll: false });
+              setTabOverride("archived");
+              startTabTransition(() => {
+                router.replace("/feed?tab=archived");
               });
             }}
-            onMouseEnter={() => router.prefetch("/feed?tab=archived")}
             className={clsx(
-              "px-3 py-1 rounded-md transition-colors",
-              tab === "archived"
+              "px-3 py-1 rounded-md transition-colors duration-150 active:scale-[0.98]",
+              status === "archived"
                 ? "bg-slate-900 text-white"
                 : "text-slate-600",
             )}
@@ -108,7 +114,7 @@ export default function FeedClient() {
       {filteredPosts === null ? (
         <SkeletonGrid />
       ) : filteredPosts.length === 0 ? (
-        <EmptyState archived={tab === "archived"} />
+        <EmptyState archived={status === "archived"} />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {filteredPosts.map((p) => (
