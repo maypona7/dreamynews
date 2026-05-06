@@ -6,6 +6,7 @@ import { getSessionUser, requireRole } from "@/lib/auth/session";
 import { postSchema } from "@/lib/schemas";
 import { FieldValue } from "firebase-admin/firestore";
 import { sendNewPostEmail } from "@/lib/email";
+import { sendNewPostGoogleChat } from "@/lib/google-chat";
 
 function htmlToExcerpt(html: string, max = 180): string {
   const text = html
@@ -56,15 +57,23 @@ export async function createPostAction(input: {
   const id = ref.id;
 
   // 이메일 알림은 실패해도 글 작성 자체는 성공하도록 분리.
+  const notifyPayload = {
+    title: parsed.title,
+    excerpt: htmlToExcerpt(parsed.contentHtml),
+    postId: id,
+    eventAt: parsed.eventAt,
+  };
+
   try {
-    await sendNewPostEmail({
-      title: parsed.title,
-      excerpt: htmlToExcerpt(parsed.contentHtml),
-      postId: id,
-      eventAt: parsed.eventAt,
-    });
+    await sendNewPostEmail(notifyPayload);
   } catch (e) {
     console.error("sendNewPostEmail failed", e);
+  }
+
+  try {
+    await sendNewPostGoogleChat(notifyPayload);
+  } catch (e) {
+    console.error("sendNewPostGoogleChat failed", e);
   }
 
   return { id };

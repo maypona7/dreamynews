@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth/AuthProvider";
 import type { AppUser } from "@/lib/types";
-import clsx from "clsx";
 
 export default function Header({
   siteName,
@@ -15,14 +14,8 @@ export default function Header({
 }) {
   const { signOut, role, firebaseUser } = useAuth();
   const router = useRouter();
-  const pathname = usePathname();
   const effectiveRole = role ?? appUser.role;
   const profilePhotoURL = appUser.photoURL ?? firebaseUser?.photoURL ?? null;
-
-  const navItems = [
-    { href: "/feed", label: "소식" },
-    { href: "/feed?tab=archived", label: "아카이브" },
-  ];
 
   return (
     <header className="sticky top-0 z-30 border-b border-brand-200 bg-white/80 backdrop-blur">
@@ -32,22 +25,6 @@ export default function Header({
             {siteName}
           </span>
         </Link>
-        <nav className="hidden sm:flex items-center gap-1 ml-2">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={clsx(
-                "px-3 py-1.5 rounded-lg text-sm",
-                pathname === item.href.split("?")[0]
-                  ? "text-brand-800 bg-brand-100 font-medium"
-                  : "text-brand-600 hover:bg-brand-50 hover:text-brand-800",
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
         <div className="flex-1" />
         {(effectiveRole === "writer" || effectiveRole === "admin") && (
           <Link

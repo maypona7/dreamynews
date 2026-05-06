@@ -5,10 +5,8 @@ import Header from "@/components/Header";
 
 export default async function MainLayout({
   children,
-  modal,
 }: {
   children: ReactNode;
-  modal: ReactNode;
 }) {
   const session = await getSessionUser();
   if (!session) redirect("/login");
@@ -25,7 +23,6 @@ export default async function MainLayout({
       <main className="flex-1 mx-auto w-full max-w-5xl px-4 py-6 sm:py-10">
         {children}
       </main>
-      {modal}
     </div>
   );
 }

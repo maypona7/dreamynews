@@ -27,7 +27,6 @@ export default function PostCard({
     <Link
       href={href}
       prefetch
-      scroll={false}
       className={clsx(
         "card p-5 flex flex-col gap-3 hover:shadow-md active:scale-[0.997] transition",
         post.pinned && "border-amber-200 bg-amber-50/40",

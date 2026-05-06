@@ -6,9 +6,21 @@ import nodemailer from "nodemailer";
 const {
   GMAIL_USER,
   GMAIL_APP_PASSWORD,
-  EMAIL_TO = "stu@dreamyedu.net",
-  APP_BASE_URL = "https://example.com",
+  APP_BASE_URL = "https://dreamynews.netlify.app/",
 } = process.env;
+
+const DEFAULT_EMAIL_TO = "stu@dreamyedu.net";
+
+/** EMAIL_TO 에 `a@x.com,b@y.com` 또는 세미콜론/줄바꿈으로 여러 명 지정 가능 */
+function resolveEmailRecipients(): string[] {
+  const raw = process.env.EMAIL_TO?.trim();
+  if (!raw) return [DEFAULT_EMAIL_TO];
+  const emails = raw
+    .split(/[,;\n]+/)
+    .map((e) => e.trim())
+    .filter(Boolean);
+  return emails.length > 0 ? emails : [DEFAULT_EMAIL_TO];
+}
 
 const transporter =
   GMAIL_USER && GMAIL_APP_PASSWORD
@@ -83,7 +95,7 @@ export async function sendNewPostEmail(params: {
 
   await transporter.sendMail({
     from: GMAIL_USER,
-    to: EMAIL_TO,
+    to: resolveEmailRecipients(),
     subject,
     text,
     html,

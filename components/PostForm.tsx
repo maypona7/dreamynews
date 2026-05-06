@@ -27,6 +27,11 @@ function dateInputValueToMs(value: string): number | null {
   return new Date(y, m - 1, d).getTime();
 }
 
+function todayLocalMidnightMs(): number {
+  const d = new Date();
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+}
+
 interface Props {
   mode: "create" | "edit";
   post?: Post | null;
@@ -46,7 +51,9 @@ export default function PostForm({
     post?.categoryId ?? null,
   );
   const [pinned, setPinned] = useState(post?.pinned ?? false);
-  const [eventAt, setEventAt] = useState<number | null>(post?.eventAt ?? null);
+  const [eventAt, setEventAt] = useState<number | null>(() =>
+    mode === "create" ? todayLocalMidnightMs() : (post?.eventAt ?? null),
+  );
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

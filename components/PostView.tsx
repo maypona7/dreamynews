@@ -124,14 +124,20 @@ export default function PostView({
 
       {(canEdit || canDelete) && (
         <div className="flex flex-wrap gap-2 pt-4 border-t border-brand-100">
-          {canEdit && (
-            <Link
-              href={`/posts/${post.id}/edit`}
-              className="btn-secondary"
-            >
-              수정
-            </Link>
-          )}
+          {canEdit &&
+            (variant === "modal" ? (
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={() => router.replace(`/posts/${post.id}/edit`)}
+              >
+                수정
+              </button>
+            ) : (
+              <Link href={`/posts/${post.id}/edit`} className="btn-secondary">
+                수정
+              </Link>
+            ))}
           {canEdit && (
             <button
               type="button"
