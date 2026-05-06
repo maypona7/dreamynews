@@ -123,7 +123,7 @@ export default function QuillEditor({
       <div ref={editorRef} />
       {!quillReady && (
         <div className="absolute inset-0 bg-white/70 backdrop-blur-sm rounded-b-xl flex items-center justify-center animate-pulse">
-          <span className="text-sm text-slate-500">편집기를 불러오는 중...</span>
+          <span className="text-sm text-brand-600">편집기를 불러오는 중...</span>
         </div>
       )}
       <style jsx global>{`

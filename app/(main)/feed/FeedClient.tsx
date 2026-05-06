@@ -24,8 +24,15 @@ export default function FeedClient() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [posts, setPosts] = useState<Post[] | null>(null);
   const [categoryId, setCategoryId] = useState<string | null>(null);
+  const [firestoreError, setFirestoreError] = useState<string | null>(null);
 
-  useEffect(() => subscribeCategories(setCategories), []);
+  useEffect(
+    () =>
+      subscribeCategories(setCategories, (err) => {
+        console.error("categories subscription", err);
+      }),
+    [],
+  );
 
   useEffect(() => {
     if (tabOverride !== null && tabOverride === urlTab) {
@@ -39,8 +46,20 @@ export default function FeedClient() {
   }, [router]);
 
   useEffect(() => {
+    setFirestoreError(null);
     setPosts(null);
-    return subscribePosts(status, null, setPosts);
+    return subscribePosts(
+      status,
+      null,
+      setPosts,
+      (err) => {
+        console.error("posts subscription", err);
+        setFirestoreError(
+          "목록을 불러오지 못했습니다. 로그아웃 후 다시 로그인하거나 페이지를 새로고침 해 주세요.",
+        );
+        setPosts([]);
+      },
+    );
   }, [status]);
 
   const filteredPosts = useMemo(() => {
@@ -67,7 +86,7 @@ export default function FeedClient() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-2">
-        <div className="inline-flex rounded-lg border border-slate-200 bg-white p-1 text-sm">
+        <div className="inline-flex rounded-lg border border-brand-200 bg-white p-1 text-sm">
           <button
             type="button"
             onClick={() => {
@@ -79,8 +98,8 @@ export default function FeedClient() {
             className={clsx(
               "px-3 py-1 rounded-md transition-colors duration-150 active:scale-[0.98]",
               status === "published"
-                ? "bg-slate-900 text-white"
-                : "text-slate-600",
+                ? "bg-brand-600 text-white shadow-sm"
+                : "text-brand-600 hover:text-brand-800",
             )}
           >
             게시중
@@ -96,8 +115,8 @@ export default function FeedClient() {
             className={clsx(
               "px-3 py-1 rounded-md transition-colors duration-150 active:scale-[0.98]",
               status === "archived"
-                ? "bg-slate-900 text-white"
-                : "text-slate-600",
+                ? "bg-brand-600 text-white shadow-sm"
+                : "text-brand-600 hover:text-brand-800",
             )}
           >
             아카이브
@@ -110,6 +129,15 @@ export default function FeedClient() {
         value={categoryId}
         onChange={setCategoryId}
       />
+
+      {firestoreError && (
+        <div
+          className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+          role="alert"
+        >
+          {firestoreError}
+        </div>
+      )}
 
       {filteredPosts === null ? (
         <SkeletonGrid />
@@ -135,10 +163,10 @@ function SkeletonGrid() {
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {Array.from({ length: 4 }).map((_, i) => (
         <div key={i} className="card p-5 animate-pulse">
-          <div className="h-3 w-16 bg-slate-200 rounded mb-3" />
-          <div className="h-5 w-3/4 bg-slate-200 rounded mb-2" />
-          <div className="h-4 w-full bg-slate-100 rounded" />
-          <div className="h-4 w-2/3 bg-slate-100 rounded mt-1" />
+          <div className="h-3 w-16 bg-brand-200 rounded mb-3" />
+          <div className="h-5 w-3/4 bg-brand-200 rounded mb-2" />
+          <div className="h-4 w-full bg-brand-100 rounded" />
+          <div className="h-4 w-2/3 bg-brand-100 rounded mt-1" />
         </div>
       ))}
     </div>
@@ -148,15 +176,15 @@ function SkeletonGrid() {
 function EmptyState({ archived }: { archived: boolean }) {
   return (
     <div className="card p-10 text-center">
-      <div className="w-12 h-12 rounded-full bg-slate-100 mx-auto mb-3 flex items-center justify-center text-slate-400">
+      <div className="w-12 h-12 rounded-full bg-brand-100 mx-auto mb-3 flex items-center justify-center text-brand-500">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M4 6h16M4 12h16M4 18h10" />
         </svg>
       </div>
-      <h3 className="font-medium text-slate-700">
+      <h3 className="font-medium text-brand-800">
         {archived ? "아카이브된 글이 없어요" : "아직 게시된 글이 없어요"}
       </h3>
-      <p className="text-sm text-slate-500 mt-1">
+      <p className="text-sm text-brand-600 mt-1">
         {archived ? "보관된 게시글이 여기에 모입니다." : "첫 글을 작성해보세요!"}
       </p>
     </div>

@@ -8,7 +8,7 @@ export default function LoginPage() {
     <Suspense
       fallback={
         <main className="min-h-screen flex items-center justify-center">
-          <div className="text-slate-400 text-sm">로딩중...</div>
+          <div className="text-brand-500 text-sm">로딩중...</div>
         </main>
       }
     >

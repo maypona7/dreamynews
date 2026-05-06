@@ -32,14 +32,14 @@ export default function PendingPage() {
             <path d="M12 8v4l3 2" />
           </svg>
         </div>
-        <h1 className="text-xl font-bold text-slate-900">가입 승인 대기중</h1>
-        <p className="text-slate-500 mt-2 text-sm leading-relaxed">
+        <h1 className="text-xl font-bold text-brand-950">가입 승인 대기중</h1>
+        <p className="text-brand-600 mt-2 text-sm leading-relaxed">
           관리자가 가입 요청을 검토하고 있어요.
           <br />
           승인되면 자동으로 입장할 수 있습니다.
         </p>
         {appUser?.email && (
-          <p className="mt-4 text-xs text-slate-400">{appUser.email}</p>
+          <p className="mt-4 text-xs text-brand-500">{appUser.email}</p>
         )}
         <button
           type="button"

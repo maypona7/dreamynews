@@ -45,7 +45,7 @@ export default function PostView({
 
   if (!post) {
     return (
-      <div className="card p-10 text-center text-slate-500">로딩중...</div>
+      <div className="card p-10 text-center text-brand-600">로딩중...</div>
     );
   }
 
@@ -73,7 +73,7 @@ export default function PostView({
             <span className="badge bg-amber-100 text-amber-700">고정</span>
           )}
           {category && (
-            <span className="badge bg-slate-100 text-slate-700">
+            <span className="badge bg-brand-100 text-brand-800">
               <span aria-hidden="true">{category.emoji ?? "🏷️"}</span>
               {category.name}
             </span>
@@ -85,13 +85,13 @@ export default function PostView({
             </span>
           )}
           {post.status === "archived" && (
-            <span className="badge bg-slate-100 text-slate-600">아카이브</span>
+            <span className="badge bg-brand-100 text-brand-700">아카이브</span>
           )}
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">
+        <h1 className="text-2xl sm:text-3xl font-bold text-brand-950">
           {post.title}
         </h1>
-        <div className="flex items-center gap-2 text-sm text-slate-500">
+        <div className="flex items-center gap-2 text-sm text-brand-600">
           {post.author.photoURL ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -100,7 +100,7 @@ export default function PostView({
               className="w-7 h-7 rounded-full"
             />
           ) : (
-            <div className="w-7 h-7 rounded-full bg-slate-200" />
+            <div className="w-7 h-7 rounded-full bg-brand-200" />
           )}
           <span>{post.author.displayName ?? "익명"}</span>
           <span>·</span>
@@ -108,7 +108,7 @@ export default function PostView({
             {new Date(post.createdAt).toLocaleString("ko-KR")}
           </time>
           {post.updatedAt > post.createdAt + 1000 && (
-            <span className="text-xs text-slate-400">(수정됨)</span>
+            <span className="text-xs text-brand-500">(수정됨)</span>
           )}
         </div>
       </header>
@@ -118,12 +118,12 @@ export default function PostView({
         dangerouslySetInnerHTML={{ __html: post.contentHtml }}
       />
 
-      <div className="border-t border-slate-100 pt-4">
+      <div className="border-t border-brand-100 pt-4">
         <ReactionBar postId={post.id} counts={post.reactionCounts} />
       </div>
 
       {(canEdit || canDelete) && (
-        <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
+        <div className="flex flex-wrap gap-2 pt-4 border-t border-brand-100">
           {canEdit && (
             <Link
               href={`/posts/${post.id}/edit`}

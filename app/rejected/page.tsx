@@ -22,8 +22,8 @@ export default function RejectedPage() {
             <path d="M15 9l-6 6M9 9l6 6" />
           </svg>
         </div>
-        <h1 className="text-xl font-bold text-slate-900">가입이 거절되었습니다</h1>
-        <p className="text-slate-500 mt-2 text-sm">
+        <h1 className="text-xl font-bold text-brand-950">가입이 거절되었습니다</h1>
+        <p className="text-brand-600 mt-2 text-sm">
           접근 권한이 없습니다. 관리자에게 문의해주세요.
         </p>
         <button

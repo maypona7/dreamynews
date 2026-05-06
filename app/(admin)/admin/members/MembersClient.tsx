@@ -76,8 +76,8 @@ export default function MembersClient({
             onClick={() => setFilter(f)}
             className={
               filter === f
-                ? "px-3 py-1 rounded-full text-sm bg-slate-900 text-white"
-                : "px-3 py-1 rounded-full text-sm bg-white text-slate-600 border border-slate-200"
+                ? "px-3 py-1 rounded-full text-sm bg-brand-600 text-white"
+                : "px-3 py-1 rounded-full text-sm bg-white text-brand-700 border border-brand-200"
             }
           >
             {labelFor(f)}
@@ -91,9 +91,9 @@ export default function MembersClient({
         </p>
       )}
 
-      <div className="card divide-y divide-slate-100 overflow-hidden">
+      <div className="card divide-y divide-brand-100 overflow-hidden">
         {filtered.length === 0 ? (
-          <div className="p-6 text-center text-sm text-slate-500">
+          <div className="p-6 text-center text-sm text-brand-600">
             해당하는 멤버가 없어요
           </div>
         ) : (
@@ -111,10 +111,10 @@ export default function MembersClient({
                     className="w-9 h-9 rounded-full"
                   />
                 ) : (
-                  <div className="w-9 h-9 rounded-full bg-slate-200" />
+                  <div className="w-9 h-9 rounded-full bg-brand-200" />
                 )}
                 <div className="min-w-0">
-                  <div className="text-sm font-medium text-slate-900 truncate">
+                  <div className="text-sm font-medium text-brand-950 truncate">
                     {m.displayName ?? "이름 없음"}
                     {firebaseUser?.uid === m.uid && (
                       <span className="ml-2 badge bg-brand-50 text-brand-700">
@@ -122,7 +122,7 @@ export default function MembersClient({
                       </span>
                     )}
                   </div>
-                  <div className="text-xs text-slate-500 truncate">
+                  <div className="text-xs text-brand-600 truncate">
                     {m.email}
                   </div>
                 </div>
@@ -207,7 +207,7 @@ function StatusBadge({ status }: { status: string }) {
     rejected: "거절",
   };
   return (
-    <span className={`badge ${styles[status] ?? "bg-slate-100 text-slate-600"}`}>
+    <span className={`badge ${styles[status] ?? "bg-brand-100 text-brand-700"}`}>
       {label[status] ?? status}
     </span>
   );

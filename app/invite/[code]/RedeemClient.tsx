@@ -59,10 +59,10 @@ export default function RedeemClient({ code }: { code: string }) {
             <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
           </svg>
         </div>
-        <h1 className="text-xl font-bold text-slate-900">초대 코드 사용</h1>
-        <p className="text-sm text-slate-500">
+        <h1 className="text-xl font-bold text-brand-950">초대 코드 사용</h1>
+        <p className="text-sm text-brand-600">
           초대 코드:{" "}
-          <span className="font-mono text-slate-800">{code}</span>
+          <span className="font-mono text-brand-900">{code}</span>
         </p>
 
         {!firebaseUser ? (
@@ -83,7 +83,7 @@ export default function RedeemClient({ code }: { code: string }) {
             {phase === "signing-in" ? "로그인 중..." : "Google로 로그인하고 가입"}
           </button>
         ) : phase === "redeeming" ? (
-          <p className="text-sm text-slate-500">초대 코드 적용 중...</p>
+          <p className="text-sm text-brand-600">초대 코드 적용 중...</p>
         ) : phase === "done" ? (
           <p className="text-sm text-emerald-600">가입이 완료되었어요. 이동 중...</p>
         ) : null}

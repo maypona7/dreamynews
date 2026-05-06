@@ -25,10 +25,10 @@ export default function Header({
   ];
 
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-brand-200 bg-white/80 backdrop-blur">
       <div className="mx-auto flex max-w-5xl items-center gap-4 px-4 py-3">
         <Link href="/feed" className="flex h-8 items-center">
-          <span className="inline-flex h-8 items-center font-semibold leading-none text-slate-900">
+          <span className="inline-flex h-8 items-center font-semibold leading-none text-brand-950">
             {siteName}
           </span>
         </Link>
@@ -40,8 +40,8 @@ export default function Header({
               className={clsx(
                 "px-3 py-1.5 rounded-lg text-sm",
                 pathname === item.href.split("?")[0]
-                  ? "text-brand-700 bg-brand-50"
-                  : "text-slate-600 hover:bg-slate-100",
+                  ? "text-brand-800 bg-brand-100 font-medium"
+                  : "text-brand-600 hover:bg-brand-50 hover:text-brand-800",
               )}
             >
               {item.label}
@@ -76,11 +76,11 @@ export default function Header({
               className="w-8 h-8 rounded-full"
             />
           ) : (
-            <div className="w-8 h-8 rounded-full bg-slate-200" />
+            <div className="w-8 h-8 rounded-full bg-brand-200" />
           )}
           <button
             type="button"
-            className="text-xs text-slate-500 hover:text-slate-700"
+            className="text-xs text-brand-600 hover:text-brand-800"
             onClick={async () => {
               await signOut();
               router.replace("/login");

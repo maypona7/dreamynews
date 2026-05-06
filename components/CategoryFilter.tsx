@@ -19,8 +19,8 @@ export default function CategoryFilter({
         className={clsx(
           "px-3 py-1.5 rounded-full text-sm whitespace-nowrap border transition-colors",
           value === null
-            ? "bg-slate-900 text-white border-slate-900"
-            : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50",
+            ? "bg-brand-600 text-white border-brand-600"
+            : "bg-white text-brand-700 border-brand-200 hover:bg-brand-50",
         )}
         onClick={() => onChange(null)}
       >
@@ -33,8 +33,8 @@ export default function CategoryFilter({
           className={clsx(
             "px-3 py-1.5 rounded-full text-sm whitespace-nowrap border transition-colors",
             value === c.id
-              ? "bg-slate-900 text-white border-slate-900"
-              : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50",
+              ? "bg-brand-600 text-white border-brand-600"
+              : "bg-white text-brand-700 border-brand-200 hover:bg-brand-50",
           )}
           onClick={() => onChange(c.id)}
         >

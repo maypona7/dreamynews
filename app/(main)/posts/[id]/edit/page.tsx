@@ -28,7 +28,7 @@ export default async function EditPostPage({
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-bold text-slate-900">게시글 수정</h1>
+      <h1 className="text-xl font-bold text-brand-950">게시글 수정</h1>
       <div className="card p-6 sm:p-8">
         <PostForm mode="edit" post={post} />
       </div>

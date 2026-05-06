@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --background: 252 254 255;
-    --foreground: 15 23 42;
+    --background: 240 249 255;
+    --foreground: 8 47 73;
   }
 
   html,
@@ -40,28 +40,28 @@
     @apply btn bg-brand-500 text-white hover:bg-brand-600;
   }
   .btn-secondary {
-    @apply btn bg-white text-slate-700 border border-slate-200 hover:bg-slate-50;
+    @apply btn bg-white text-brand-800 border border-brand-200 hover:bg-brand-50;
   }
   .btn-ghost {
-    @apply btn text-slate-600 hover:bg-brand-50;
+    @apply btn text-brand-700 hover:bg-brand-50;
   }
   .btn-danger {
     @apply btn bg-red-600 text-white hover:bg-red-700;
   }
   .input {
-    @apply w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200;
+    @apply w-full rounded-lg border border-brand-200 bg-white px-3 py-2 text-sm text-brand-950 placeholder:text-brand-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200;
   }
   .badge {
     @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium;
   }
   .card {
-    @apply rounded-xl bg-white shadow-card border border-slate-50;
+    @apply rounded-xl bg-white shadow-card border border-brand-100;
   }
 }
 
 /* Quill content viewer styles for rendered HTML */
 .prose-content {
-  @apply text-slate-800 leading-relaxed;
+  @apply text-brand-900 leading-relaxed;
 }
 .prose-content h1 {
   @apply text-2xl font-bold mt-6 mb-3;
@@ -82,7 +82,7 @@
   @apply list-decimal pl-5 my-3;
 }
 .prose-content blockquote {
-  @apply border-l-4 border-slate-300 pl-4 italic text-slate-600 my-3;
+  @apply border-l-4 border-brand-300 pl-4 italic text-brand-700 my-3;
 }
 .prose-content a {
   @apply text-brand-600 underline;
@@ -91,10 +91,10 @@
   @apply rounded-lg my-3 max-w-full;
 }
 .prose-content pre {
-  @apply bg-slate-900 text-slate-100 rounded-lg p-3 overflow-x-auto my-3 text-sm;
+  @apply bg-brand-950 text-brand-50 rounded-lg p-3 overflow-x-auto my-3 text-sm;
 }
 .prose-content code {
-  @apply bg-slate-100 rounded px-1 py-0.5 text-sm;
+  @apply bg-brand-100 rounded px-1 py-0.5 text-sm;
 }
 .prose-content pre code {
   @apply bg-transparent p-0;

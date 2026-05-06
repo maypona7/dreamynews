@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 export default function FeedPage() {
   return (
-    <Suspense fallback={<div className="text-slate-400 text-sm">로딩중...</div>}>
+    <Suspense fallback={<div className="text-brand-500 text-sm">로딩중...</div>}>
       <FeedClient />
     </Suspense>
   );

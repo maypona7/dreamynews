@@ -28,7 +28,7 @@ export default function SettingsClient({ initial }: { initial: AppSettings }) {
     <div className="space-y-4 max-w-xl">
       <div className="card p-5 space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
+          <label className="block text-sm font-medium text-brand-800 mb-1">
             사이트 이름
           </label>
           <input
@@ -52,10 +52,10 @@ export default function SettingsClient({ initial }: { initial: AppSettings }) {
             }
           />
           <span>
-            <span className="block text-sm font-medium text-slate-800">
+            <span className="block text-sm font-medium text-brand-900">
               자동 승인
             </span>
-            <span className="block text-xs text-slate-500 mt-1">
+            <span className="block text-xs text-brand-600 mt-1">
               켜면 Google 로그인 후 곧바로 viewer 권한이 부여됩니다. 끄면 관리자
               승인 전까지 대기 상태로 남습니다.
             </span>

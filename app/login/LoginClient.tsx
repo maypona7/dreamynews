@@ -27,10 +27,10 @@ export default function LoginClient() {
   }, [firebaseUser, appUser, loading, router, next]);
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-50 via-white to-slate-50 px-4">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-50 via-white to-brand-50 px-4">
       <div className="card w-full max-w-md p-8 text-center">
-        <h1 className="text-2xl font-bold text-slate-900">소식함</h1>
-        <p className="text-slate-500 mt-2 text-sm">
+        <h1 className="text-2xl font-bold text-brand-950">소식함</h1>
+        <p className="text-brand-600 mt-2 text-sm">
           학교 소식과 공지를 한 곳에서 모아 보세요.
         </p>
         <button

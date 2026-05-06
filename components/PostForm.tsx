@@ -106,7 +106,7 @@ export default function PostForm({
   return (
     <form onSubmit={onSubmit} className="space-y-5">
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className="block text-sm font-medium text-brand-800 mb-1">
           제목
         </label>
         <input
@@ -122,7 +122,7 @@ export default function PostForm({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
+          <label className="block text-sm font-medium text-brand-800 mb-1">
             카테고리
           </label>
           <select
@@ -145,12 +145,12 @@ export default function PostForm({
             checked={pinned}
             onChange={(e) => setPinned(e.target.checked)}
           />
-          <span className="text-sm text-slate-700">상단에 고정</span>
+          <span className="text-sm text-brand-800">상단에 고정</span>
         </label>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className="block text-sm font-medium text-brand-800 mb-1">
           행사일
         </label>
         <input
@@ -162,7 +162,7 @@ export default function PostForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className="block text-sm font-medium text-brand-800 mb-1">
           내용
         </label>
         <QuillEditor value={contentHtml} onChange={setContentHtml} />

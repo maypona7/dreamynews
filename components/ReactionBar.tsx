@@ -94,7 +94,7 @@ export default function ReactionBar({
               "inline-flex items-center gap-1 px-2.5 py-1 rounded-full border text-sm transition-colors",
               active
                 ? "border-brand-300 bg-brand-50 text-brand-700"
-                : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50",
+                : "border-brand-200 bg-white text-brand-700 hover:bg-brand-50",
               !isApproved && "opacity-50 cursor-not-allowed",
             )}
             aria-pressed={active}

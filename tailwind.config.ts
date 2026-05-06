@@ -3,27 +3,31 @@ import type { Config } from "tailwindcss";
 const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
+    "./app/globals.css",
     "./components/**/*.{ts,tsx}",
     "./lib/**/*.{ts,tsx}",
   ],
   theme: {
     extend: {
       colors: {
+        /** 하늘색 기반 강조 팔레트 (Tailwind `sky` 계열과 동일 HEX) */
         brand: {
-          50: "#f2fbff",
-          100: "#def4fc",
-          200: "#bfe8f8",
-          300: "#94d7f0",
-          400: "#60c1e6",
-          500: "#2faedb",
-          600: "#1f90bc",
-          700: "#1f7397",
-          800: "#215f7b",
-          900: "#224f66",
+          50: "#f0f9ff",
+          100: "#e0f2fe",
+          200: "#bae6fd",
+          300: "#7dd3fc",
+          400: "#38bdf8",
+          500: "#0ea5e9",
+          600: "#0284c7",
+          700: "#0369a1",
+          800: "#075985",
+          900: "#0c4a6e",
+          950: "#082f49",
         },
       },
       boxShadow: {
-        card: "0 1px 2px rgba(15,23,42,0.04), 0 4px 12px rgba(15,23,42,0.06)",
+        card:
+          "0 1px 2px rgba(14,165,233,0.06), 0 4px 12px rgba(14,165,233,0.1)",
       },
     },
   },

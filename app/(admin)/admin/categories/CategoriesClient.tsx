@@ -91,7 +91,7 @@ export default function CategoriesClient({
   return (
     <div className="space-y-6">
       <div className="card p-5 space-y-3">
-        <h2 className="text-base font-semibold text-slate-900">카테고리 추가</h2>
+        <h2 className="text-base font-semibold text-brand-950">카테고리 추가</h2>
         <div className="flex flex-col sm:flex-row gap-3">
           <input
             type="text"
@@ -118,9 +118,9 @@ export default function CategoriesClient({
         )}
       </div>
 
-      <div className="card divide-y divide-slate-100 overflow-hidden">
+      <div className="card divide-y divide-brand-100 overflow-hidden">
         {categories.length === 0 ? (
-          <div className="p-6 text-center text-sm text-slate-500">
+          <div className="p-6 text-center text-sm text-brand-600">
             아직 카테고리가 없어요
           </div>
         ) : (
@@ -129,7 +129,7 @@ export default function CategoriesClient({
               key={c.id}
               className="p-4 flex items-center gap-3"
             >
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-slate-100 text-base">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-brand-100 text-base">
                 {c.emoji ?? "🏷️"}
               </span>
               <input
@@ -187,8 +187,8 @@ function EmojiPicker({
             onClick={() => onChange(emoji)}
             className={
               value === emoji
-                ? "inline-flex h-8 w-8 items-center justify-center rounded-md bg-slate-100 ring-2 ring-offset-1 ring-slate-400"
-                : "inline-flex h-8 w-8 items-center justify-center rounded-md bg-slate-100 hover:bg-slate-200"
+                ? "inline-flex h-8 w-8 items-center justify-center rounded-md bg-brand-100 ring-2 ring-offset-1 ring-brand-400"
+                : "inline-flex h-8 w-8 items-center justify-center rounded-md bg-brand-100 hover:bg-brand-200"
             }
           >
             {emoji}

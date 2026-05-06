@@ -91,10 +91,10 @@ export default function InvitesClient({
   return (
     <div className="space-y-6">
       <div className="card p-5 space-y-4">
-        <h2 className="text-base font-semibold text-slate-900">초대링크 발급</h2>
+        <h2 className="text-base font-semibold text-brand-950">초대링크 발급</h2>
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
           <div>
-            <label className="block text-xs text-slate-500 mb-1">권한</label>
+            <label className="block text-xs text-brand-600 mb-1">권한</label>
             <select
               className="input"
               value={role}
@@ -105,7 +105,7 @@ export default function InvitesClient({
             </select>
           </div>
           <div>
-            <label className="block text-xs text-slate-500 mb-1">사용 횟수</label>
+            <label className="block text-xs text-brand-600 mb-1">사용 횟수</label>
             <input
               type="number"
               min={1}
@@ -116,7 +116,7 @@ export default function InvitesClient({
             />
           </div>
           <div>
-            <label className="block text-xs text-slate-500 mb-1">만료일</label>
+            <label className="block text-xs text-brand-600 mb-1">만료일</label>
             <input
               type="date"
               className="input"
@@ -125,7 +125,7 @@ export default function InvitesClient({
             />
           </div>
           <div>
-            <label className="block text-xs text-slate-500 mb-1">메모</label>
+            <label className="block text-xs text-brand-600 mb-1">메모</label>
             <input
               type="text"
               className="input"
@@ -155,12 +155,12 @@ export default function InvitesClient({
 
       <div className="card overflow-hidden">
         {invites.length === 0 ? (
-          <div className="p-6 text-center text-sm text-slate-500">
+          <div className="p-6 text-center text-sm text-brand-600">
             발급된 초대링크가 없어요
           </div>
         ) : (
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 text-slate-600 text-left">
+            <thead className="bg-brand-50 text-brand-700 text-left">
               <tr>
                 <th className="p-3">코드</th>
                 <th className="p-3">권한</th>
@@ -170,7 +170,7 @@ export default function InvitesClient({
                 <th className="p-3 text-right"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-brand-100">
               {invites.map((i) => {
                 const url = getInviteUrl(i.code);
                 const exhausted = i.useCount >= i.maxUses;
@@ -200,7 +200,7 @@ export default function InvitesClient({
                     </td>
                     <td className="p-3">
                       {i.status === "revoked" ? (
-                        <span className="badge bg-slate-100 text-slate-500">
+                        <span className="badge bg-brand-100 text-brand-600">
                           회수됨
                         </span>
                       ) : expired ? (
@@ -208,7 +208,7 @@ export default function InvitesClient({
                           만료
                         </span>
                       ) : exhausted ? (
-                        <span className="badge bg-slate-100 text-slate-500">
+                        <span className="badge bg-brand-100 text-brand-600">
                           소진
                         </span>
                       ) : (
@@ -217,7 +217,7 @@ export default function InvitesClient({
                         </span>
                       )}
                     </td>
-                    <td className="p-3 text-slate-600">{i.note ?? "—"}</td>
+                    <td className="p-3 text-brand-700">{i.note ?? "—"}</td>
                     <td className="p-3 text-right space-x-2">
                       {i.status === "active" && (
                         <button

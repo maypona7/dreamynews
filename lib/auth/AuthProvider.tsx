@@ -37,7 +37,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);
   const [appUser, setAppUser] = useState<AppUser | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const auth = getClientAuth();
     const unsub = onIdTokenChanged(auth, async (u) => {
@@ -48,11 +47,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return;
       }
       try {
-        await fetch("/api/auth/session", {
+        const res = await fetch("/api/auth/session", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ idToken: await u.getIdToken() }),
         });
+        if (!res.ok) return;
+        /* Firestore rules는 ID 토큰의 custom claims(status/role)를 본다. 세션에서 claims를 맞춘 직후에는
+           아직 이전 토큰이므로 한 번 갱신해야 게시글/카테고리 구독이 permission-denied 나지 않음. */
+        const tr = await u.getIdTokenResult();
+        if (!("status" in tr.claims)) {
+          await u.getIdToken(true);
+        }
       } catch (e) {
         console.error("session sync failed", e);
       }

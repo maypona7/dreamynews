@@ -27,8 +27,8 @@ export default function Modal({
 
   const overlayClassName =
     variant === "page"
-      ? "fixed inset-0 z-50 flex items-start justify-center bg-slate-900/40 backdrop-blur-sm"
-      : "fixed inset-0 z-50 flex items-start sm:items-center justify-center p-3 sm:p-6 bg-slate-900/40 backdrop-blur-sm";
+      ? "fixed inset-0 z-50 flex items-start justify-center bg-brand-950/45 backdrop-blur-sm"
+      : "fixed inset-0 z-50 flex items-start sm:items-center justify-center p-3 sm:p-6 bg-brand-950/45 backdrop-blur-sm";
 
   const dialogClassName =
     variant === "page"
@@ -51,7 +51,7 @@ export default function Modal({
         <button
           type="button"
           onClick={() => router.back()}
-          className="absolute top-3 right-3 w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-500"
+          className="absolute top-3 right-3 w-8 h-8 rounded-full hover:bg-brand-100 flex items-center justify-center text-brand-600"
           aria-label="닫기"
         >
           <svg
