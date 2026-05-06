@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import type { Category, Post } from "@/lib/types";
 import { useReadMap } from "@/lib/readTracker";
@@ -12,19 +13,29 @@ export default function PostCard({
   post: Post;
   category: Category | null;
 }) {
+  const router = useRouter();
   const readMap = useReadMap();
   const lastRead = readMap[post.id] ?? 0;
   const isUnread = post.updatedAt > lastRead;
+  const href = `/posts/${post.id}`;
+
+  function prefetchPost() {
+    router.prefetch(href);
+  }
 
   return (
     <Link
-      href={`/posts/${post.id}`}
+      href={href}
+      prefetch
       scroll={false}
       className={clsx(
-        "card p-5 flex flex-col gap-3 hover:shadow-md transition-shadow",
+        "card p-5 flex flex-col gap-3 hover:shadow-md active:scale-[0.997] transition",
         post.pinned && "border-amber-200 bg-amber-50/40",
       )}
       aria-label={`게시글 ${post.title}`}
+      onMouseEnter={prefetchPost}
+      onTouchStart={prefetchPost}
+      onFocus={prefetchPost}
     >
       <div className="flex items-center gap-2 flex-wrap">
         {post.pinned && (

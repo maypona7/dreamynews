@@ -17,7 +17,7 @@ Next.js 15(App Router) + Firebase 기반 학교 공지/소식 게시판입니다
 
 - Next.js 15, React 18, TypeScript, TailwindCSS
 - Firebase (Auth, Firestore, Storage), Firebase Admin SDK
-- TanStack Query, Zod, Quill (`react-quill-new`)
+- TanStack Query, Zod, Quill
 
 ## 로컬 실행
 

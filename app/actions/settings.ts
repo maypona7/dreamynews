@@ -6,7 +6,7 @@ import { requireRole } from "@/lib/auth/session";
 import { settingsSchema } from "@/lib/schemas";
 import type { AppSettings } from "@/lib/types";
 
-const DEFAULTS: AppSettings = { autoApprove: true, siteName: "학교 소식함" };
+const DEFAULTS: AppSettings = { autoApprove: true, siteName: "소식함" };
 
 export async function getSettingsAction(): Promise<AppSettings> {
   await requireRole(["admin"]);

@@ -48,7 +48,7 @@ export async function POST(req: Request) {
 
   const settings = (settingsSnap.exists
     ? settingsSnap.data()
-    : { autoApprove: true, siteName: "학교 소식함" }) as AppSettings;
+    : { autoApprove: true, siteName: "소식함" }) as AppSettings;
 
   const usersCount = (
     await adminDb().collection("users").count().get()

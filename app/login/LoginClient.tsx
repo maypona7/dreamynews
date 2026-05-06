@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Image from "next/image";
 import { useAuth } from "@/lib/auth/AuthProvider";
 
 export default function LoginClient() {
@@ -30,17 +29,7 @@ export default function LoginClient() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-50 via-white to-slate-50 px-4">
       <div className="card w-full max-w-md p-8 text-center">
-        <div className="mx-auto mb-5 h-14 w-14 overflow-hidden rounded-2xl">
-          <Image
-            src="/logo.png"
-            alt="학교 소식함 로고"
-            width={56}
-            height={56}
-            className="h-14 w-14 scale-[1.55] object-cover object-center"
-            priority
-          />
-        </div>
-        <h1 className="text-2xl font-bold text-slate-900">학교 소식함</h1>
+        <h1 className="text-2xl font-bold text-slate-900">소식함</h1>
         <p className="text-slate-500 mt-2 text-sm">
           학교 소식과 공지를 한 곳에서 모아 보세요.
         </p>

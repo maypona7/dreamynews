@@ -34,7 +34,7 @@ export async function sendNewPostEmail(params: {
   const safeTitle = escapeHtml(params.title);
   const safeExcerpt = escapeHtml(params.excerpt);
 
-  const subject = `[학교 소식함] 새 공지: ${params.title}`;
+  const subject = `[소식함] 새 공지: ${params.title}`;
   const text = [
     `새 공지가 등록되었습니다.\n`,
     `제목: ${params.title}\n`,
@@ -53,7 +53,7 @@ export async function sendNewPostEmail(params: {
           <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;">
             <tr>
               <td style="padding:20px 24px;background:linear-gradient(135deg,#f2fbff,#def4fc);border-bottom:1px solid #e2e8f0;">
-                <div style="font-size:13px;font-weight:600;color:#1f7397;letter-spacing:.2px;">학교 소식함</div>
+                <div style="font-size:13px;font-weight:600;color:#1f7397;letter-spacing:.2px;">소식함</div>
                 <h1 style="margin:8px 0 0;font-size:20px;line-height:1.4;color:#0f172a;">새 공지가 등록되었어요</h1>
               </td>
             </tr>

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import Image from "next/image";
 import { useAuth } from "@/lib/auth/AuthProvider";
 import type { AppUser } from "@/lib/types";
 import clsx from "clsx";
@@ -28,16 +27,7 @@ export default function Header({
   return (
     <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur">
       <div className="mx-auto flex max-w-5xl items-center gap-4 px-4 py-3">
-        <Link href="/feed" className="flex h-8 items-center gap-2">
-          <div className="-translate-y-[2px] h-8 w-8 shrink-0 overflow-hidden rounded-lg">
-            <Image
-              src="/logo.png"
-              alt="학교 소식함 로고"
-              width={32}
-              height={32}
-              className="h-8 w-8 scale-[1.55] object-cover object-center"
-            />
-          </div>
+        <Link href="/feed" className="flex h-8 items-center">
           <span className="inline-flex h-8 items-center font-semibold leading-none text-slate-900">
             {siteName}
           </span>

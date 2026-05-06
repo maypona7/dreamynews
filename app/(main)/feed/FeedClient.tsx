@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import PostCard from "@/components/PostCard";
@@ -14,25 +14,40 @@ import type { Category, Post, PostStatus } from "@/lib/types";
 export default function FeedClient() {
   const router = useRouter();
   const params = useSearchParams();
-  const tab = params.get("tab") === "archived" ? "archived" : "published";
-  const status: PostStatus = tab;
+  const urlTab: PostStatus =
+    params.get("tab") === "archived" ? "archived" : "published";
+
+  const [tab, setTab] = useState<PostStatus>(urlTab);
+  const [, startTransition] = useTransition();
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [posts, setPosts] = useState<Post[] | null>(null);
   const [categoryId, setCategoryId] = useState<string | null>(null);
 
+  useEffect(() => {
+    setTab(urlTab);
+  }, [urlTab]);
+
   useEffect(() => subscribeCategories(setCategories), []);
 
   useEffect(() => {
     setPosts(null);
-    return subscribePosts(status, null, setPosts);
-  }, [status]);
+    return subscribePosts(tab, null, setPosts);
+  }, [tab]);
 
   const filteredPosts = useMemo(() => {
     if (posts === null) return null;
     if (!categoryId) return posts;
     return posts.filter((post) => post.categoryId === categoryId);
   }, [posts, categoryId]);
+
+  useEffect(() => {
+    if (!posts || posts.length === 0) return;
+    // 첫 클릭 딜레이를 줄이기 위해 상단 게시글 상세 라우트를 미리 워밍업.
+    posts.slice(0, 6).forEach((post) => {
+      router.prefetch(`/posts/${post.id}`);
+    });
+  }, [posts, router]);
 
   const categoryMap = useMemo(() => {
     return Object.fromEntries(categories.map((c) => [c.id, c])) as Record<
@@ -47,10 +62,16 @@ export default function FeedClient() {
         <div className="inline-flex rounded-lg border border-slate-200 bg-white p-1 text-sm">
           <button
             type="button"
-            onClick={() => router.replace("/feed")}
+            onClick={() => {
+              setTab("published");
+              startTransition(() => {
+                router.replace("/feed", { scroll: false });
+              });
+            }}
+            onMouseEnter={() => router.prefetch("/feed")}
             className={clsx(
               "px-3 py-1 rounded-md transition-colors",
-              status === "published"
+              tab === "published"
                 ? "bg-slate-900 text-white"
                 : "text-slate-600",
             )}
@@ -59,10 +80,16 @@ export default function FeedClient() {
           </button>
           <button
             type="button"
-            onClick={() => router.replace("/feed?tab=archived")}
+            onClick={() => {
+              setTab("archived");
+              startTransition(() => {
+                router.replace("/feed?tab=archived", { scroll: false });
+              });
+            }}
+            onMouseEnter={() => router.prefetch("/feed?tab=archived")}
             className={clsx(
               "px-3 py-1 rounded-md transition-colors",
-              status === "archived"
+              tab === "archived"
                 ? "bg-slate-900 text-white"
                 : "text-slate-600",
             )}
@@ -81,7 +108,7 @@ export default function FeedClient() {
       {filteredPosts === null ? (
         <SkeletonGrid />
       ) : filteredPosts.length === 0 ? (
-        <EmptyState archived={status === "archived"} />
+        <EmptyState archived={tab === "archived"} />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {filteredPosts.map((p) => (
